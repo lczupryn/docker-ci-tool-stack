@@ -92,3 +92,19 @@ services:
 #      - /opt/gitlab/config:/etc/gitlab
 #      - /opt/gitlab/logs:/var/log/gitlab
 #      - /opt/gitlab/data:/var/opt/gitlab
+#
+################
+# Add Nginx
+  nginx: 
+    image: nginx:latest
+    #container_name: production_nginx
+    volumes:
+      - /opt/nginx-data/conf.d:/etc/nginx/conf.d
+    ports:
+      - 80:80
+      - 443:443
+    depends_on:
+      - jenkins
+      - nexus
+    networks:
+      - prodnetwork
